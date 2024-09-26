@@ -10,9 +10,14 @@
 </head>
 <body>
 <div class="container">
+
 <div class="row">
 <div class="col-md-12">
 				<h3 class="text-center">INGRESO DE PRODUCTOS</h3>
+                <div class="col-md-12">
+				<div class="col-md-12 text-left">
+				<a href="welcome.php">REGRESAR A BIENVENIDA </a>
+                </div>
 </div>
 <div class="col-md-12">
 <form method="post" accept-charset="utf-8" action="save_products.php" class="form-group" enctype="multipart/form-data">

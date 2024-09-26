@@ -4,7 +4,7 @@
  * Db Clase para trabajar con Bases de Datos usando PDO
  * 
  * 
- * @author Tiara Russo <tiararusso01@gmail.com>
+ * @author Cristian Bustamante <bcristian920@>
  * @link https://github.com/cealonso/php-mysql-pdo-database-class
  * @version 1.0.0
  * @copyright 2024 
@@ -59,5 +59,8 @@ class Db
     {
         $this->connection = null;
     }
+    public function prepare($query)
+{
+        return $this->connection->prepare($query);
 }
-?>
+}
