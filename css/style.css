@@ -62,7 +62,7 @@ nav ul li a:hover {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Work Sans", sans-serif; 
 }
 
 .gallery li {
@@ -172,7 +172,20 @@ footer {
   top:-10px;
   opacity:0.9;
 }
-
+/* Search */
+#search-container {
+  display: flex;
+  justify-content: center; /*creamos una caja flexible y la centramos en el eje x*/
+  }
+  #search-container input {
+    padding: 1em 0.3em; /*modificamos el relleno con respecto al borde */
+ }
+ #search-container button{
+  padding: 1em 2em;
+  margin-left: 1em;
+  background-color: #E82A51;
+  color: #fff; /*cambiamos el relleno y color de fondo y fuente del botón*/
+}
 @media (max-width: 960px) {
   #header-container {
     flex-direction: column;

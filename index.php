@@ -45,20 +45,45 @@
     </header>
     <div class="main-content">
         <h2 class="animate__animated animate__backInLeft">NUESTRAS PIZZAS</h2>
+        <form accept-charset="utf-8" method="get">
+        <div id="search-container">
+        <input type="search" size="30" placeholder="Descripción del producto..." id="search-input" name="search-input">
+        <button id="search" name="search">Buscar</button>
+        </div>
+        </form>
         <div id="cart">
             <i class="fa badge" id="badge" value=0><i class="fa-solid fa-cart-shopping fa-lg"></i></i>
         </div>
         <ul class="gallery">
              <?PHP 
-             include_once("config_products.php");
+            $search = isset($_GET['search-input']) ? $_GET['search-input'] : ''; /* reemplazamos a esto $search = $_GET['search-input'];*/
+            /*$search = isset($_GET['search-input']) ? $_GET['search-input'] : ''; sirve para sacar el warning*/
+            include_once("config_products.php");
              include_once("db.class.php");
              $link=new Db();
+             if (isset($_GET['search'])) 
+            {
+            $sql = "select c.category_name,p.image,p.product_name,p.price, date_format(p.start_date,'%d/%m/%Y') as DATE from products p inner join categories c on p.id_category=c.id_category  where product_name like CONCAT ('%', '$search', '%') or category_name like CONCAT('%', '$search', '%') order by p.price";
+            } 
+            else 
+            {
+            $sql = "select c.category_name,p.image,p.product_name,p.price, date_format(p.start_date,'%d/%m/%Y') as DATE from products p inner join categories c on p.id_category=c.id_category  order by p.price";
+            }
              try {
                 // Conexion a la Base de Datos
                 $conn = new PDO("mysql:host=". SERVER_NAME. ";dbname=" . DATABASE_NAME, USER_NAME, PASSWORD);
                 //echo "Conexion Exitosa";
-                $sql="SELECT c.category_name,p.image,p.product_name,p.price,date_format(p.start_date,'%d/%m/%Y') as 'DATE' FROM products p inner join categories c on p.id_category=c.id_category order by p.price";
+                /*$sql="SELECT c.category_name,p.image,p.product_name,p.price,date_format(p.start_date,'%d/%m/%Y') as 'DATE' FROM products p inner join categories c on p.id_category=c.id_category order by p.price"; esto es reemplazado por la linea 70*/
                 $stmt=$link->run($sql, NULL);
+                if ($stmt->rowCount()==0){
+                    echo "No hay resultados";
+                    }
+                    /*else
+                    {
+                    echo "Se han encontrado " . $stmt->rowCount(). " resultados";
+                    }
+                    */
+                    
                 $data=$stmt->fetchAll();
                 $stmt= $conn -> prepare ($sql);
                 $stmt->execute();
@@ -83,11 +108,13 @@
                     </figure>
                 </div>
             </li>
-            <?PHP
+            <?php
+            
                 }
             ?>
         </ul>
     </div>
+    
     <footer>
         <p>Copyright &copy;
             <script> document.write(new Date().getFullYear()); </script> Todos los derechos reservados
