@@ -4,8 +4,8 @@
  * Db Clase para trabajar con Bases de Datos usando PDO
  * 
  * 
- * @author Cristian Bustamante <bcristian920@>
- * @link https://github.com/cealonso/php-mysql-pdo-database-class
+ * @author Tiara Russo <tiararusso01@gmail.com>
+ * @link https://github.com/tiararusso
  * @version 1.0.0
  * @copyright 2024 
  * 
